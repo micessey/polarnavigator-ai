@@ -67,7 +67,7 @@ function Index() {
   const detour = dest
     ? `M${SHIP.x},${SHIP.y} C${hazard.x - R * 1.6},${SHIP.y + 60} ${hazard.x - R * 1.2},${hazard.y + R * 1.2} ${hazard.x},${hazard.y + R + 25} S${dest.x - 60},${dest.y + 50} ${dest.x},${dest.y}`
     : "";
-  const risk = stage === "idle" ? 0 : stage === "routed" ? 10 : stage === "hazard" ? 55 : 40;
+  const risk = stage === "idle" ? 0 : stage === "routed" ? 10 : stage === "hazard" ? 80 : 68;
   const optimized = stage === "optimized";
 
   return (
@@ -141,7 +141,7 @@ function Index() {
                   d={stage === "routed" ? straight : optimized ? detour : straight}
                   fill="none" stroke="var(--safe)" strokeWidth="5" filter="url(#glow)" strokeLinecap="round"
                   markerEnd={stage === "routed" ? "url(#arr)" : undefined}
-                  pathLength={1} strokeDasharray="1" style={{ strokeDashoffset: 0, transition: "d 1s ease" }}
+                  key={stage} pathLength={1} strokeDasharray="1" className="draw"
                   opacity={stage === "hazard" ? 0.5 : 1}
                 />
               )}
@@ -169,9 +169,21 @@ function Index() {
               )}
             </div>
             {optimized && (
+              <div className="absolute left-12 top-12 z-10 w-44 rounded border border-border bg-card/90 p-2 text-[10px]">
+                <div className="mb-1 font-bold">ROUTE ANALYSIS</div>
+                {[["Distance","1,284 nm"],["Ice density","34%"],["Avg speed","11.2 kn"],["Detour","+42 nm"],["Fuel","-12%"],["Risk","Medium"]].map(([k,v])=>(
+                  <div key={k} className="flex justify-between border-b border-border/40 py-0.5"><span className="text-muted-foreground">{k}</span><span>{v}</span></div>
+                ))}
+                <div className="mt-2 mb-1 font-bold">ICE FORECAST</div>
+                {[["+24h","Drift NE 0.8 kn"],["+45h","Floe merge"],["+72h","Clear lane"]].map(([k,v])=>(
+                  <div key={k} className="flex justify-between py-0.5"><span className="text-muted-foreground">{k}</span><span>{v}</span></div>
+                ))}
+              </div>
+            )}
+            {optimized && (
               <div className="absolute bottom-2 left-80 z-10 flex items-center gap-3 rounded border border-border bg-card/90 px-3 py-1 text-xs">
                 <span>00:21</span>
-                <div className="relative h-1 w-64 rounded bg-muted-foreground/40"><div className="h-1 w-1/2 rounded bg-safe" /></div>
+                <div className="w-64"><div className="relative h-1 rounded bg-muted-foreground/40"><div className="h-1 w-1/2 rounded bg-safe" /></div><div className="mt-1 flex justify-between text-[9px] text-muted-foreground"><span>00.00</span><span>06.00</span><span>12.00</span></div></div>
               </div>
             )}
             <div className="absolute bottom-2 right-3 z-10 flex flex-col gap-1 text-[10px]">
@@ -189,6 +201,9 @@ function Index() {
               <button onClick={simulate} className="flex items-center justify-between rounded border border-border bg-card px-3 py-2 text-left font-bold hover:bg-muted-foreground/20">
                 SIMULATE NEW<br />HAZARD <LogOut size={16} />
               </button>
+            )}
+            {stage !== "idle" && (
+              <button onClick={() => { setStage("idle"); setDest(null); }} className="rounded border border-border bg-card px-3 py-2 text-left font-bold hover:bg-muted-foreground/20">RESET ROUTE</button>
             )}
             <div className="font-bold">RISK METER</div>
             <Gauge value={risk} />

@@ -39,7 +39,7 @@ function Index() {
   }, [stage]);
 
   useEffect(() => {
-    const target = stage === "idle" ? 0 : 12;
+    const target = stage === "optimized" ? 12 : 0;
     const id = setInterval(() => setFuel((f) => (f === target ? f : f + Math.sign(target - f))), 60);
     return () => clearInterval(id);
   }, [stage]);

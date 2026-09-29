@@ -160,3 +160,5 @@
 .flow { animation: dash 1.2s linear infinite; }
 @keyframes pulse-ring { 0%{r:6;opacity:1} 100%{r:22;opacity:0} }
 .pulse { animation: pulse-ring 1.5s ease-out infinite; }
+@keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+.draw { animation: draw 1.2s ease-out forwards; }

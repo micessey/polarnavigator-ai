@@ -1,10 +1,10 @@
-# Prototype Builder
+# Polar navigator ai Builder
 
 bulid a prototype
 
 This project was built with [Lovable](https://lovable.dev).
 
-## Build with Lovable
+
 
 Continue developing this project in the [Lovable editor](https://lovable.dev/projects/11ee9680-7681-4492-b0de-42238d7f8578).
 

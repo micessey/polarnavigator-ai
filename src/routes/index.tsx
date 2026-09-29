@@ -169,7 +169,7 @@ function Index() {
               )}
             </div>
             {optimized && (
-              <div className="absolute left-12 bottom-32 z-10 w-44 rounded border border-border bg-card/90 p-2 text-[10px]">
+              <div className="absolute right-3 top-14 z-10 w-44 rounded border border-border bg-card/90 p-2 text-[10px]">
                 <div className="mb-1 font-bold">ROUTE ANALYSIS</div>
                 {[["Distance","1,284 nm"],["Ice density","34%"],["Avg speed","11.2 kn"],["Detour","+42 nm"],["Fuel","-12%"],["Risk","Medium"]].map(([k,v])=>(
                   <div key={k} className="flex justify-between border-b border-border/40 py-0.5"><span className="text-muted-foreground">{k}</span><span>{v}</span></div>

@@ -35,6 +35,7 @@ function Index() {
       const t = setTimeout(() => setStage("optimized"), 1600);
       return () => clearTimeout(t);
     }
+    return undefined;
   }, [stage]);
 
   useEffect(() => {

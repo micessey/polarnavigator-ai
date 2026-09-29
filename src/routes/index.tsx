@@ -169,18 +169,6 @@ function Index() {
               )}
             </div>
             {optimized && (
-              <div className="absolute right-3 top-14 z-10 w-44 rounded border border-border bg-card/90 p-2 text-[10px]">
-                <div className="mb-1 font-bold">ROUTE ANALYSIS</div>
-                {[["Distance","1,284 nm"],["Ice density","34%"],["Avg speed","11.2 kn"],["Detour","+42 nm"],["Fuel","-12%"],["Risk","Medium"]].map(([k,v])=>(
-                  <div key={k} className="flex justify-between border-b border-border/40 py-0.5"><span className="text-muted-foreground">{k}</span><span>{v}</span></div>
-                ))}
-                <div className="mt-2 mb-1 font-bold">ICE FORECAST</div>
-                {[["+24h","Drift NE 0.8 kn"],["+45h","Floe merge"],["+72h","Clear lane"]].map(([k,v])=>(
-                  <div key={k} className="flex justify-between py-0.5"><span className="text-muted-foreground">{k}</span><span>{v}</span></div>
-                ))}
-              </div>
-            )}
-            {optimized && (
               <div className="absolute bottom-2 left-80 z-10 flex items-center gap-3 rounded border border-border bg-card/90 px-3 py-1 text-xs">
                 <span>00:21</span>
                 <div className="w-64"><div className="relative h-1 rounded bg-muted-foreground/40"><div className="h-1 w-1/2 rounded bg-safe" /></div><div className="mt-1 flex justify-between text-[9px] text-muted-foreground"><span>00.00</span><span>06.00</span><span>12.00</span></div></div>
@@ -207,6 +195,18 @@ function Index() {
             )}
             <div className="font-bold">RISK METER</div>
             <Gauge value={risk} />
+            {optimized && (
+              <div className="rounded border border-border bg-card p-2 text-[10px]">
+                <div className="mb-1 font-bold">ROUTE ANALYSIS</div>
+                {[["Distance","1,284 nm"],["Ice density","34%"],["Avg speed","11.2 kn"],["Detour","+42 nm"],["Fuel","-12%"],["Risk","Medium"]].map(([k,v])=>(
+                  <div key={k} className="flex justify-between border-b border-border/40 py-0.5"><span className="text-muted-foreground">{k}</span><span>{v}</span></div>
+                ))}
+                <div className="mt-2 mb-1 font-bold">ICE FORECAST</div>
+                {[["+24h","Drift NE 0.8 kn"],["+45h","Floe merge"],["+72h","Clear lane"]].map(([k,v])=>(
+                  <div key={k} className="flex justify-between py-0.5"><span className="text-muted-foreground">{k}</span><span>{v}</span></div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

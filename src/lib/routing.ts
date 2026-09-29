@@ -3,8 +3,8 @@ export type Berg = Pt & { r: number };
 export type RouteKey = "shortest" | "safest" | "fuel";
 export type LegType = "Open water" | "Caution zone" | "Near destination";
 
-export const NM_PER_UNIT = 3; // 1000 map units ≈ 3000 NM
-export const BASE_MARGIN = 10; // map units (30 NM)
+export const NM_PER_UNIT = 1.4;
+export const BASE_MARGIN = 16;
 export const FUEL_PRICE = 650; // USD per tonne
 export const CO2_PER_T = 3.2;
 

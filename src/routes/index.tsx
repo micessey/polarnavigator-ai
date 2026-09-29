@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import { Ship, MapPin, AlertTriangle, CalendarDays, Fuel, Plus, Minus, Compass, Download, Star } from "lucide-react";
 import mapImg from "@/assets/polar-map.jpg";
 import {
-  computeRoutes, recommend, riskColor, toD, ROUTE_DEFS, type Berg, type Pt, type RouteKey, type LegType,
+  computeRoutes, recommend, riskColor, toD, ROUTE_DEFS, NM_PER_UNIT, type Berg, type Pt, type RouteKey, type LegType,
 } from "@/lib/routing";
 
 export const Route = createFileRoute("/")({
@@ -42,7 +42,7 @@ function Index() {
   const fuelSaved = Math.round(((maxFuel - cur.fuel) / maxFuel) * 100);
   const cautionLegs = cur.legs.filter((l) => l.type === "Caution zone").length;
   const alerts = [
-    ...(cur.bergsNear ? [{ t: `${cur.bergsNear} ICEBERG(S) NEAR ROUTE`, b: "Within 60 NM of the selected track" }] : []),
+    ...(cur.bergsNear ? [{ t: `${cur.bergsNear} ICEBERG(S) NEAR ROUTE`, b: "Within the Safest margin of the selected track" }] : []),
     ...(cautionLegs ? [{ t: "CAUTION ZONES", b: `${cautionLegs} leg(s) at reduced speed` }] : []),
     ...(rec !== sel ? [{ t: "RECOMMENDATION", b: `${ROUTE_DEFS[rec].label} scores better with current weights` }] : []),
   ];
@@ -147,7 +147,7 @@ function Index() {
               <div className="absolute bottom-0 left-0 z-10 w-80 rounded-tr border border-border bg-card/90 p-2 text-xs">
                 <div className="mb-1 font-bold">EXPLAINABLE AI</div>
                 <ul className="list-inside list-disc text-muted-foreground">
-                  <li>{ROUTE_DEFS[sel].label}: margin {ROUTE_DEFS[sel].margin * 3} NM, {ROUTE_DEFS[sel].speed} kn.</li>
+                  <li>{ROUTE_DEFS[sel].label}: margin {Math.round(ROUTE_DEFS[sel].margin * NM_PER_UNIT)} NM, {ROUTE_DEFS[sel].speed} kn.</li>
                   <li>{cur.legs.length} legs, {cautionLegs} in caution zones.</li>
                   <li>Recommended: {ROUTE_DEFS[rec].label}. Click map to move destination.</li>
                 </ul>

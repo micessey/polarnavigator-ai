@@ -88,11 +88,14 @@ function Index() {
             </div>
           </div>
           <Stat icon={<CalendarDays size={18} />} label="ETA:" value="8.5 Days" />
-          <div className={`flex items-center gap-2 rounded border px-3 py-2 transition-colors ${fuel > 0 && fuel < 12 ? "border-safe bg-safe/40" : "border-border bg-card"}`}>
-            <Fuel size={18} />
-            <div>
+          <div className={`flex items-center gap-2 rounded border px-3 py-2 transition-colors ${fuel >= 12 ? "border-safe bg-safe/40" : "border-border bg-card"}`}>
+            <Fuel size={18} className={fuel >= 12 ? "text-safe" : ""} />
+            <div className="flex-1">
               <div className="text-[10px] text-muted-foreground">FUEL SAVED:</div>
               <div className="font-bold">{fuel}%</div>
+              <div className="mt-1 h-1.5 w-full overflow-hidden rounded bg-muted-foreground/30">
+                <div className="h-full rounded bg-safe transition-all duration-150" style={{ width: `${(fuel / 12) * 100}%` }} />
+              </div>
             </div>
           </div>
         </div>
